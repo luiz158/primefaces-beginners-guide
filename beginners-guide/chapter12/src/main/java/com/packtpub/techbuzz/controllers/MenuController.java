@@ -9,10 +9,10 @@ import javax.faces.event.ActionEvent;
 import javax.faces.event.ActionListener;
 import javax.faces.event.MethodExpressionActionListener;
 
-import org.primefaces.component.menuitem.MenuItem;
-import org.primefaces.component.submenu.Submenu;
-import org.primefaces.model.DefaultMenuModel;
-import org.primefaces.model.MenuModel;
+import org.primefaces.model.menu.DefaultMenuItem;
+import org.primefaces.model.menu.DefaultSubMenu;
+import org.primefaces.model.menu.DefaultMenuModel;
+import org.primefaces.model.menu.MenuModel;
 
 /**
  * @author K. Siva Prasad Reddy
@@ -41,45 +41,45 @@ public class MenuController
 	{
 		simpleMenuModel = new DefaultMenuModel();
 		
-		MenuItem rootItem1 = new MenuItem();
+		DefaultMenuItem rootItem1 = new DefaultMenuItem();
 		rootItem1.setValue("System Config");
 		rootItem1.setIcon("ui-icon-gear");
-		simpleMenuModel.addMenuItem(rootItem1 );
+		simpleMenuModel.addElement(rootItem1 );
 		
-		Submenu sm1 = new Submenu();
+		DefaultSubMenu sm1 = new DefaultSubMenu();
 		sm1.setLabel("User Management");
 		sm1.setIcon("ui-icon-person");
 		
-			MenuItem sm1Menu1Item1 = new MenuItem();
+			DefaultMenuItem sm1Menu1Item1 = new DefaultMenuItem();
 			sm1Menu1Item1.setValue("View Users");
-			sm1Menu1Item1.setActionExpression(buildMethodExpression("#{menuController.showUserManagement()}"));
+			sm1Menu1Item1.setCommand("#{menuController.showUserManagement()}");
 		
-			MenuItem sm1Menu1Item2 = new MenuItem();
+			DefaultMenuItem sm1Menu1Item2 = new DefaultMenuItem();
 			sm1Menu1Item2.setValue("View User Activity");
-			sm1Menu1Item2.addActionListener(buildMethodExpressionActionListener("#{menuController.showUserActivity()}"));
+			sm1Menu1Item2.setCommand("#{menuController.showUserActivity()}");
 			sm1Menu1Item2.setAjax(false);
 			
-			sm1.getChildren().add(sm1Menu1Item1);
-			sm1.getChildren().add(sm1Menu1Item2);
+			sm1.addElement(sm1Menu1Item1);
+			sm1.addElement(sm1Menu1Item2);
 			
-		simpleMenuModel.addSubmenu(sm1);
+		simpleMenuModel.addElement(sm1);
 		
-		Submenu sm2 = new Submenu();
+		DefaultSubMenu sm2 = new DefaultSubMenu();
 		sm2.setLabel("Tag Management");
 		sm2.setIcon("ui-icon-tag");
 		
-			MenuItem sm2Item1 = new MenuItem();
+			DefaultMenuItem sm2Item1 = new DefaultMenuItem();
 			sm2Item1.setValue("View Tags");
 			sm2Item1.setOutcome("menu");
 			
-			MenuItem sm2Item2 = new MenuItem();
+			DefaultMenuItem sm2Item2 = new DefaultMenuItem();
 			sm2Item2.setValue("Tag Stistics");
 			sm2Item2.setUrl("menu.jsf");
 			
-		sm2.getChildren().add(sm2Item1);
-		sm2.getChildren().add(sm2Item2);
+		sm2.addElement(sm2Item1);
+		sm2.addElement(sm2Item2);
 		
-		simpleMenuModel.addSubmenu(sm2);
+		simpleMenuModel.addElement(sm2);
 		
 		
 	}
@@ -87,57 +87,57 @@ public class MenuController
 	{
 		menuModel = new DefaultMenuModel();
 		
-		Submenu sm1 = new Submenu();
+		DefaultSubMenu sm1 = new DefaultSubMenu();
 		sm1.setLabel("User Management");
 		sm1.setIcon("ui-icon-person");
 		
-			Submenu sm1Menu1 = new Submenu();
+			DefaultSubMenu sm1Menu1 = new DefaultSubMenu();
 			sm1Menu1.setLabel("View Users");
 			
 				
-				MenuItem sm1Menu1Ite1 = new MenuItem();
+				DefaultMenuItem sm1Menu1Ite1 = new DefaultMenuItem();
 				sm1Menu1Ite1.setValue("Moderators");
 				sm1Menu1Ite1.setUrl("tieredMenu.jsf");
 			
-				MenuItem sm1Menu1Ite2 = new MenuItem();
+				DefaultMenuItem sm1Menu1Ite2 = new DefaultMenuItem();
 				sm1Menu1Ite2.setValue("Normal Users");
-				sm1Menu1Ite2.setActionExpression(buildMethodExpression("#{menuController.showUserManagement()}"));
+				sm1Menu1Ite2.setCommand("#{menuController.showUserManagement()}");
 				sm1Menu1Ite2.setAjax(false);
 			
-			sm1Menu1.getChildren().add(sm1Menu1Ite1);
-			sm1Menu1.getChildren().add(sm1Menu1Ite2);
+			sm1Menu1.addElement(sm1Menu1Ite1);
+			sm1Menu1.addElement(sm1Menu1Ite2);
 				
-			MenuItem sm1Item2 = new MenuItem();
+			DefaultMenuItem sm1Item2 = new DefaultMenuItem();
 			sm1Item2.setValue("Monitor User Activity");
-			sm1Item2.addActionListener(buildMethodExpressionActionListener("#{menuController.showUserActivity()}"));
+			sm1Item2.setCommand("#{menuController.showUserActivity()}");
 			sm1Item2.setAjax(false);
 			
-		sm1.getChildren().add(sm1Menu1);
-		sm1.getChildren().add(sm1Item2);
+		sm1.addElement(sm1Menu1);
+		sm1.addElement(sm1Item2);
 		
-		menuModel.addSubmenu(sm1);
+		menuModel.addElement(sm1);
 		
-		Submenu sm2 = new Submenu();
+		DefaultSubMenu sm2 = new DefaultSubMenu();
 		sm2.setLabel("Tag Management");
 		sm2.setIcon("ui-icon-tag");
 		
-			MenuItem sm2Item1 = new MenuItem();
+			DefaultMenuItem sm2Item1 = new DefaultMenuItem();
 			sm2Item1.setValue("View Tags");
 			sm2Item1.setOutcome("menu");
 			
-			MenuItem sm2Item2 = new MenuItem();
+			DefaultMenuItem sm2Item2 = new DefaultMenuItem();
 			sm2Item2.setValue("Tag Stistics");
 			sm2Item2.setUrl("menu.jsf");
 			
-		sm2.getChildren().add(sm2Item1);
-		sm2.getChildren().add(sm2Item2);
+		sm2.addElement(sm2Item1);
+		sm2.addElement(sm2Item2);
 		
-		menuModel.addSubmenu(sm2);
+		menuModel.addElement(sm2);
 		
-		MenuItem rootItem1 = new MenuItem();
+		DefaultMenuItem rootItem1 = new DefaultMenuItem();
 		rootItem1.setValue("System Config");
 		rootItem1.setIcon("ui-icon-gear");
-		menuModel.addMenuItem(rootItem1 );
+		menuModel.addElement(rootItem1 );
 		
 	}
 	
@@ -145,140 +145,140 @@ public class MenuController
 	{
 		tieredMenuModel = new DefaultMenuModel();
 		
-		Submenu sm1 = new Submenu();
+		DefaultSubMenu sm1 = new DefaultSubMenu();
 		sm1.setLabel("User Management");
 		sm1.setIcon("ui-icon-person");
 		
-			MenuItem sm1Item1 = new MenuItem();
+			DefaultMenuItem sm1Item1 = new DefaultMenuItem();
 			sm1Item1.setValue("Disable/Enable User");
 			
-			sm1Item1.addActionListener(buildMethodExpressionActionListener("#{menuController.showUserManagement()}"));
+			sm1Item1.setCommand("#{menuController.showUserManagement()}");
 			sm1Item1.setAjax(false);
 			
-			MenuItem sm1Item2 = new MenuItem();
+			DefaultMenuItem sm1Item2 = new DefaultMenuItem();
 			sm1Item2.setValue("View User Activity");
-			sm1Item2.addActionListener(buildMethodExpressionActionListener("#{menuController.showUserActivity()}"));
+			sm1Item2.setCommand("#{menuController.showUserActivity()}");
 			
-		sm1.getChildren().add(sm1Item1);
-		sm1.getChildren().add(sm1Item2);
+		sm1.addElement(sm1Item1);
+		sm1.addElement(sm1Item2);
 		
-		tieredMenuModel.addSubmenu(sm1);
+		tieredMenuModel.addElement(sm1);
 		
 		
-		Submenu sm2 = new Submenu();
+		DefaultSubMenu sm2 = new DefaultSubMenu();
 		sm2.setLabel("Tag Management");
 		sm2.setIcon("ui-icon-tag");
 		
-			MenuItem sm2Item1 = new MenuItem();
+			DefaultMenuItem sm2Item1 = new DefaultMenuItem();
 			sm2Item1.setValue("View Tags");
 			sm2Item1.setOutcome("tieredMenu");
 			
-			MenuItem sm2Item2 = new MenuItem();
+			DefaultMenuItem sm2Item2 = new DefaultMenuItem();
 			sm2Item2.setValue("Create Tag");
 			sm2Item2.setUrl("tieredMenu.jsf");
 			
-		sm2.getChildren().add(sm2Item1);
-		sm2.getChildren().add(sm2Item2);
+		sm2.addElement(sm2Item1);
+		sm2.addElement(sm2Item2);
 		
 		
-		tieredMenuModel.addSubmenu(sm2);
+		tieredMenuModel.addElement(sm2);
 		
 		
-		Submenu sm3 = new Submenu();
+		DefaultSubMenu sm3 = new DefaultSubMenu();
 		sm3.setLabel("Reports");
 		sm3.setIcon("ui-icon-folder-open");
 		
-			Submenu sm3menu1 = new Submenu();
+			DefaultSubMenu sm3menu1 = new DefaultSubMenu();
 			sm3menu1.setLabel("User Reports");
 				
-				MenuItem sm3menu1Item1 = new MenuItem();
+				DefaultMenuItem sm3menu1Item1 = new DefaultMenuItem();
 				sm3menu1Item1.setValue("Post Statistics");
 				sm3menu1Item1.setUrl("tieredMenu.jsf");
 				
-				MenuItem sm3menu1Item2 = new MenuItem();
+				DefaultMenuItem sm3menu1Item2 = new DefaultMenuItem();
 				sm3menu1Item2.setValue("User Count Tracking");
 				sm3menu1Item2.setUrl("tieredMenu.jsf");
 				
-			sm3menu1.getChildren().add(sm3menu1Item1);
-			sm3menu1.getChildren().add(sm3menu1Item2);
+			sm3menu1.addElement(sm3menu1Item1);
+			sm3menu1.addElement(sm3menu1Item2);
 			
-			Submenu sm3menu2 = new Submenu();
+			DefaultSubMenu sm3menu2 = new DefaultSubMenu();
 			sm3menu2.setLabel("Tag Usage Reports");
 			
-				MenuItem sm3menu2Item1 = new MenuItem();
+				DefaultMenuItem sm3menu2Item1 = new DefaultMenuItem();
 				sm3menu2Item1.setValue("Tag Usage Statistics");
 				sm3menu2Item1.setUrl("tieredMenu.jsf");
 				
-				MenuItem sm3menu2Item2 = new MenuItem();
+				DefaultMenuItem sm3menu2Item2 = new DefaultMenuItem();
 				sm3menu2Item2.setValue("Tags Usage by User");
 				sm3menu2Item2.setUrl("tieredMenu.jsf");
 				
-			sm3menu2.getChildren().add(sm3menu2Item1);
-			sm3menu2.getChildren().add(sm3menu2Item2);
+			sm3menu2.addElement(sm3menu2Item1);
+			sm3menu2.addElement(sm3menu2Item2);
 			
-		sm3.getChildren().add(sm3menu1);
-		sm3.getChildren().add(sm3menu2);
+		sm3.addElement(sm3menu1);
+		sm3.addElement(sm3menu2);
 		
-		tieredMenuModel.addSubmenu(sm3);
+		tieredMenuModel.addElement(sm3);
 		
-		Submenu sm4 = new Submenu();
+		DefaultSubMenu sm4 = new DefaultSubMenu();
 		sm4.setLabel("System Configuration");
 		sm4.setIcon("ui-icon-gear");
 		
-			Submenu sm4menu1 = new Submenu();
+			DefaultSubMenu sm4menu1 = new DefaultSubMenu();
 			sm4menu1.setLabel("Global Settings");
 				
-				MenuItem sm4menu1Item1 = new MenuItem();
+				DefaultMenuItem sm4menu1Item1 = new DefaultMenuItem();
 				sm4menu1Item1.setValue("Cache Settings");
 				sm4menu1Item1.setUrl("tieredMenu.jsf");
 				
-				MenuItem sm4menu1Item2 = new MenuItem();
+				DefaultMenuItem sm4menu1Item2 = new DefaultMenuItem();
 				sm4menu1Item2.setValue("User Lock Policy");
 				sm4menu1Item2.setIcon("ui-icon-locked");
 				sm4menu1Item2.setUrl("tieredMenu.jsf");
 				
-				sm4menu1.getChildren().add(sm4menu1Item1);
-				sm4menu1.getChildren().add(sm4menu1Item2);
+				sm4menu1.addElement(sm4menu1Item1);
+				sm4menu1.addElement(sm4menu1Item2);
 			
-			Submenu sm4menu2 = new Submenu();
+			DefaultSubMenu sm4menu2 = new DefaultSubMenu();
 			sm4menu2.setLabel("Email Server");
 			sm4menu2.setIcon("ui-icon-mail-closed");
 			
-				MenuItem sm4menu2Item1 = new MenuItem();
+				DefaultMenuItem sm4menu2Item1 = new DefaultMenuItem();
 				sm4menu2Item1.setValue("SMTP Settings");
 				sm4menu2Item1.setUrl("tieredMenu.jsf");
 				
-			sm4menu2.getChildren().add(sm4menu2Item1);
+			sm4menu2.addElement(sm4menu2Item1);
 			
-		sm4.getChildren().add(sm4menu1);
-		sm4.getChildren().add(sm4menu2);
+		sm4.addElement(sm4menu1);
+		sm4.addElement(sm4menu2);
 		
-		tieredMenuModel.addSubmenu(sm4);
+		tieredMenuModel.addElement(sm4);
 		
 	}
 	
 	void initBreadcrumbMenuModel()
 	{
 		breadcrumbMenuModel = new DefaultMenuModel();
-		MenuItem item1 = new MenuItem();
+		DefaultMenuItem item1 = new DefaultMenuItem();
 		item1.setValue("PrimeFaces");
 		item1.setUrl("http://www.primefaces.org/");
-		breadcrumbMenuModel.addMenuItem(item1);
+		breadcrumbMenuModel.addElement(item1);
 		
-		MenuItem item2 = new MenuItem();
+		DefaultMenuItem item2 = new DefaultMenuItem();
 		item2.setValue("Board index");
 		item2.setUrl("http://forum.primefaces.org/index.php");
-		breadcrumbMenuModel.addMenuItem(item2);
+		breadcrumbMenuModel.addElement(item2);
 		
-		MenuItem item3 = new MenuItem();
+		DefaultMenuItem item3 = new DefaultMenuItem();
 		item3.setValue("JavaServer Faces");
 		item3.setUrl("http://forum.primefaces.org/viewforum.php?f=19");
-		breadcrumbMenuModel.addMenuItem(item3);
+		breadcrumbMenuModel.addElement(item3);
 		
-		MenuItem item4 = new MenuItem();
+		DefaultMenuItem item4 = new DefaultMenuItem();
 		item4.setValue("General");
 		item4.setUrl("http://forum.primefaces.org/viewforum.php?f=3");
-		breadcrumbMenuModel.addMenuItem(item4);
+		breadcrumbMenuModel.addElement(item4);
 		
 	}
 	
